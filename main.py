@@ -32,6 +32,8 @@ class MyWidget(QMainWindow):
 
         self.addressBtn.clicked.connect(self.address_find)
 
+        self.resetBtn.clicked.connect(self.reset)
+
         self.render_map()
 
     def getImage(self):
@@ -99,6 +101,15 @@ class MyWidget(QMainWindow):
                 self.cords = f"{toponym_longitude},{toponym_lattitude}"
                 self.pt = f"{toponym_longitude},{toponym_lattitude},ya_ru"
                 self.render_map()
+
+    def reset(self):
+        self.z_value = 10
+        self.mode = 0
+        self.cords = "37.732504,55.753215"
+        self.pt = None
+        self.address.setText("")
+        self.lBtn.setStyleSheet("background-image : url(data/map.png)")
+        self.render_map()
 
 
 if __name__ == '__main__':
