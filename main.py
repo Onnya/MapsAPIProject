@@ -14,9 +14,18 @@ class MyWidget(QMainWindow):
         super().__init__()
 
         self.z_value = 10
+        self.modes = [
+            "map",
+            "sat",
+            "skl"
+        ]
+        self.mode = 0
 
         uic.loadUi('map.ui', self)
         self.setWindowTitle('Maps API')
+        self.lBtn.setFlat(True)
+        self.lBtn.setStyleSheet("background-image : url(data/map.png)")
+        self.lBtn.clicked.connect(self.change_l)
 
         self.render_map()
 
@@ -24,7 +33,7 @@ class MyWidget(QMainWindow):
         map_params = {
             "ll": "37.732504,55.753215",
             "z": f"{self.z_value}",
-            "l": "map",
+            "l": f"{self.modes[self.mode]}"
         }
         map_request = "http://static-maps.yandex.ru/1.x/"
         response = requests.get(map_request, params=map_params)
@@ -56,7 +65,10 @@ class MyWidget(QMainWindow):
         self.pixmap = QPixmap(self.map_file)
         self.label.setPixmap(self.pixmap)
 
-
+    def change_l(self):
+        self.mode = (self.mode + 1) % 3
+        self.lBtn.setStyleSheet(f"background-image : url(data/{self.modes[self.mode]}.png)")
+        self.render_map()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
