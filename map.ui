@@ -23,6 +23,9 @@
       <height>450</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border:none;</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -123,6 +126,22 @@
     </property>
     <property name="text">
      <string>Сброс</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lBtn">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>400</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
