@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border:none;</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string/>
@@ -58,7 +58,7 @@
      <string>Что ищем?</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="adressBtn">
+   <widget class="QPushButton" name="addressBtn">
     <property name="geometry">
      <rect>
       <x>20</x>
