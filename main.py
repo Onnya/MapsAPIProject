@@ -34,6 +34,8 @@ class MyWidget(QMainWindow):
 
         self.resetBtn.clicked.connect(self.reset)
 
+        self.label.setFocus()
+
         self.render_map()
 
     def getImage(self):
@@ -66,6 +68,27 @@ class MyWidget(QMainWindow):
         elif event.key() == Qt.Key_PageDown:
             if self.z_value > 0:
                 self.z_value -= 1
+        elif event.key() == Qt.Key_Left:
+            x, y = self.cords.split(",")
+            x = float(x) - (180 / (2 ** self.z_value))
+            x = x + 360 if x < -180 else x
+            self.cords = f"{x},{y}"
+        elif event.key() == Qt.Key_Right:
+            x, y = self.cords.split(",")
+            x = float(x) + (180 / (2 ** self.z_value))
+            x = x - 360 if x >= 180 else x
+            self.cords = f"{x},{y}"
+        elif event.key() == Qt.Key_Up:
+            x, y = self.cords.split(",")
+            if float(y) + (180 / (2 ** self.z_value)) < 84:
+                y = float(y) + (180 / (2 ** self.z_value))
+            self.cords = f"{x},{y}"
+        elif event.key() == Qt.Key_Down:
+            x, y = self.cords.split(",")
+            if float(y) - (180 / (2 ** self.z_value)) > -84:
+                y = float(y) - (180 / (2 ** self.z_value))
+            self.cords = f"{x},{y}"
+
         self.render_map()
 
     def render_map(self):
@@ -110,6 +133,10 @@ class MyWidget(QMainWindow):
         self.address.setText("")
         self.lBtn.setStyleSheet("background-image : url(data/map.png)")
         self.render_map()
+
+    def mouseReleaseEvent(self, event):
+        if event.x() >= 300:
+            self.label.setFocus()
 
 
 if __name__ == '__main__':
